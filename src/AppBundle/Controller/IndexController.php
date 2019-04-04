@@ -35,11 +35,13 @@ class IndexController extends Controller
     /**
      * @Route("/add", name="add")
      */
-    public function AddAction()
+    public function AddAction(Request $request)
     {
         if($_POST){
+            $user = $this->container->get('security.context')->getToken()->getUser();
+            $user_id=$user->getId();
             $Article = new Article();
-            $Article->setUserId($_POST['user_id']);
+            $Article->setUserId($user_id);
             $Article->setTitle($_POST['title']);
             $Article->setContent($_POST['content']);
             $em = $this->getDoctrine()->getManager();
@@ -49,8 +51,7 @@ class IndexController extends Controller
             $em->flush();
             return $this->redirect('/list');
         }else{
-            $user = $this->container->get('security.context')->getToken()->getUser();
-            return $this->render('default/add.html.twig', array('user' => $user));
+            return $this->render('default/add.html.twig');
         }
     }
 

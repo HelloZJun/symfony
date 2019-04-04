@@ -16,6 +16,7 @@ class User extends BaseUser
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @OneToMany(targetEntity="Article", mappedBy="userId")
      */
     protected $id;
 
@@ -23,6 +24,7 @@ class User extends BaseUser
     {
         parent::__construct();
         // your own logic
+        $this->id = new ArrayCollection();
     }
 
 }
