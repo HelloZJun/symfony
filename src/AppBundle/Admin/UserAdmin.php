@@ -12,7 +12,8 @@ class UserAdmin extends Admin{
     {
         $formMapper->add('username','text')
                    ->add('email','text')
-                    ->add('password','text')
+                   ->add('password','text')
+                   ->add('enabled','text')
         ;
     }
 
@@ -27,6 +28,20 @@ class UserAdmin extends Admin{
     {
         $listMapper->addIdentifier('username')
                    ->addIdentifier('email')
+                   ->addIdentifier('enabled')
         ;
+    }
+
+    public function preUpdate($obj){
+        $this->bcrypt_pwd($obj);
+    }
+
+    public function prePersist($obj){
+        $this->bcrypt_pwd($obj);
+    }
+
+    public function bcrypt_pwd(&$obj){
+        $password=password_hash($obj->getPassword(),PASSWORD_BCRYPT);
+        $obj->setPassword($password);
     }
 }

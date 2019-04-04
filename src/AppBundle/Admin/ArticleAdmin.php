@@ -8,6 +8,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
 class ArticleAdmin extends Admin{
+    public $supportsPreviewMode = true;
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper

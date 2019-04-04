@@ -5,7 +5,9 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Article;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+/*use Symfony\Component\BrowserKit\Response;*/
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class IndexController extends Controller
 {
@@ -18,6 +20,16 @@ class IndexController extends Controller
         return $this->render('default/index.html.twig', array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
         ));
+    }
+
+    /**
+     * @Route("/wx_login", name="wx_login")
+     */
+    public function wx_loginAction(Request $request)
+    {
+        $username=$request->query->get(username);
+        $password=password_hash($request->query->get(password),PASSWORD_BCRYPT);
+        return new Response(''.$password.'');
     }
 
     /**
@@ -59,4 +71,5 @@ class IndexController extends Controller
         $article_detail=$this->getDoctrine()->getRepository('AppBundle:Article')->find($slug);
         return $this->render('default/detail.html.twig',array('article_detail'=>$article_detail));
     }
+
 }
