@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+{% block title %}add{% endblock %}
+{% block body %}
+    <form action="" method="post">
+        <input type="hidden" name="user_id" value="{{ user.id }}">
+    <div>标题<input type="text" name="title" id="title"></div>
+    <div>内容<textarea name="content" id="content"></textarea></div>
+    <input type="submit">
+    </form>
+{% endblock %}

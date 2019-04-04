@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+{% block title %}list{% endblock %}
+{% block body %}
+    {% for list in article_list %}
+        <li><a href="{{ path('detail',{'slug':list.id}) }}">{{ list.title }}</a></li>
+    {% endfor %}
+{% endblock %}

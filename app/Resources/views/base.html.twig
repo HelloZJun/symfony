@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        {% block body_nav %}
+            <ul>
+                <li><a href="/login">登陆</a></li>
+                <li><a href="/register">注册</a></li>
+                <li><a href="/profile">我的</a></li>
+                <li><a href="/add">发布</a></li>
+                <li><a href="/list">列表</a></li>
+            </ul>
+        {% endblock %}
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
