@@ -18,9 +18,9 @@ class ArticleAdmin extends Admin{
                 ->end()
 
                 ->with('user_content')
-                    ->add('user_id', 'entity', array(
+                    ->add('user', 'sonata_type_model', array(
                         'class' => 'AppBundle\Entity\User',
-                        'property' => 'id',
+                        'property' => 'username',
                     ))
                 ->end()
         ;
@@ -30,7 +30,10 @@ class ArticleAdmin extends Admin{
     {
         $datagridMapper->add('title')
                        ->add('content')
-                       ->add('user_id')
+                        ->add('user', null, array(), 'entity', array(
+                            'class' => 'AppBundle\Entity\User',
+                            'property' => 'username',
+                        ))
         ;
     }
 
@@ -38,7 +41,7 @@ class ArticleAdmin extends Admin{
     {
         $listMapper->addIdentifier('title')
                    ->addIdentifier('content')
-                   ->addIdentifier('user_id')
+                    ->addIdentifier('user.username')
         ;
     }
 }

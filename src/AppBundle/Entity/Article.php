@@ -3,34 +3,50 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\ManyToOne;
-use Doctrine\ORM\Mapping\JoinColumn;
+
 /**
  * Article
+ *
+ * @ORM\Table(name="article")
+ * @ORM\Entity
  */
 class Article
 {
     /**
-     * @var integer
-     * @ManyToOne(targetEntity="User", inversedBy="id")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="articles")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
+
+    /**
+     * @var integer
+     * @ORM\Column(name="user_id", type="integer", nullable=false)
      */
     private $userId;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=255, nullable=false)
      */
     private $title;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="content", type="string", length=255, nullable=false)
      */
     private $content;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
+
 
 
     /**
@@ -110,5 +126,28 @@ class Article
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     * @return Article
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }
